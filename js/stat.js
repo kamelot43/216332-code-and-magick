@@ -13,6 +13,7 @@ window.renderStatistics = function(ctx, names, times) {
 
   var max = -1;
   var maxIndex = -1;
+  var rand = Math.random().toFixed(2);
 
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
@@ -26,14 +27,16 @@ window.renderStatistics = function(ctx, names, times) {
   var step = histogramHeigth / (max - 0);
   ctx.textBaseline = "top";
   for (var i = 0; i < times.length; i++) {
+    var rand = Math.random().toFixed(2);
+
     if (names[i] === "Вы") {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.7)";
-      ctx.fillRect(120 + 90 * i, 250, 40, -(times[i] * step));
-      ctx.fillText(names[i], 120 + 90 * i, 100 + histogramHeigth);
+      ctx.fillStyle = "rgba(255, 0, 0, 1)";
     } else {
-      ctx.fillStyle = "rgba(0, 0, 0, 1)";
-      ctx.fillRect(120 + 90 * i, 250, 40, -(times[i] * step));
-      ctx.fillText(names[i], 120 + 90 * i, 100 + histogramHeigth);
+      ctx.fillStyle = "rgba(0, 0, 255, " + rand + ")";
     }
+    ctx.fillRect(120 + 90 * i, 250, 40, -(times[i] * step));
+    ctx.fillStyle = "rgba(0, 0, 0, 1)";
+    ctx.fillText(names[i], 120 + 90 * i, 105 + histogramHeigth);
+    ctx.fillText(parseInt(times[i]), 120 + 90 * i, 80 + 150 - times[i] * step);
   }
 };
