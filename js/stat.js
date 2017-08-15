@@ -14,6 +14,11 @@ window.renderStatistics = function(ctx, names, times) {
   var max = -1;
   var maxIndex = -1;
   var rand = Math.random().toFixed(2);
+  var initialX = 120;
+  var initialY = 90;
+  var barWidth = 40;
+  var timeInitialY = 80;
+  var histogramInitialY = 250;
 
   for (var i = 0; i < times.length; i++) {
     var time = times[i];
@@ -25,6 +30,7 @@ window.renderStatistics = function(ctx, names, times) {
 
   var histogramHeigth = 150;
   var step = histogramHeigth / (max - 0);
+  var nameInitialY = histogramHeigth + 100;
   ctx.textBaseline = "top";
   for (var i = 0; i < times.length; i++) {
     var rand = Math.random().toFixed(2);
@@ -34,9 +40,18 @@ window.renderStatistics = function(ctx, names, times) {
     } else {
       ctx.fillStyle = "rgba(0, 0, 255, " + rand + ")";
     }
-    ctx.fillRect(120 + 90 * i, 250, 40, -(times[i] * step));
+    ctx.fillRect(
+      initialX + initialY * i,
+      histogramInitialY,
+      barWidth,
+      -(times[i] * step)
+    );
     ctx.fillStyle = "rgba(0, 0, 0, 1)";
-    ctx.fillText(names[i], 120 + 90 * i, 105 + histogramHeigth);
-    ctx.fillText(parseInt(times[i]), 120 + 90 * i, 80 + 150 - times[i] * step);
+    ctx.fillText(names[i], initialX + initialY * i, nameInitialY);
+    ctx.fillText(
+      parseInt(times[i]),
+      initialX + initialY * i,
+      timeInitialY + histogramHeigth - times[i] * step
+    );
   }
 };
