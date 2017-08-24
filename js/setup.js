@@ -34,13 +34,7 @@ var WIZARD_COUTS = [
   'rgb(0, 0, 0)'
 ];
 
-var WIZARD_FIREBALL = [
-  '#ee4830',
-  '#30a8ee',
-  '#5ce6c0',
-  '#e848d5',
-  '#e6e848'
-];
+var WIZARD_FIREBALL = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var WIZARD_EYES = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARD_GROUP = 4;
 
@@ -88,44 +82,53 @@ var setupClose = setup.querySelector('.setup-close');
 var setupSubmit = setup.querySelector('.setup-submit');
 var setupUserName = setup.querySelector('.setup-user-name');
 
+// Обработчики событий вынесены в отдельные функции
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === 27 && setupUserName != document.activeElement) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
 
 setupOpen.addEventListener('click', function () {
-  setup.classList.remove('hidden');
+  openPopup();
+});
 
+setupSubmit.addEventListener('click', function () {
+  if (setupUserName.validity.valid) {
+    closePopup();
+  }
+});
 
-  setupSubmit.addEventListener('click', function () {
-    if (setupUserName.validity.valid) {
-      setup.classList.add('hidden');
-    }
-  });
-
-  setupSubmit.addEventListener('keydown', function (evt) {
-    if (setupUserName.validity.valid && evt.keyCode === 13) {
-      setup.classList.add('hidden');
-    }
-  });
-
-
-  document.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === 27) {
-      setup.classList.add('hidden');
-    }
-  });
+setupSubmit.addEventListener('keydown', function (evt) {
+  if (setupUserName.validity.valid && evt.keyCode === 13) {
+    closePopup();
+  }
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 13) {
-    setup.classList.remove('hidden');
+    openPopup();
   }
 });
 
 setupClose.addEventListener('click', function () {
-  setup.classList.add('hidden');
+  closePopup();
 });
 
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === 13) {
-    setup.classList.add('hidden');
+    closePopup();
   }
 });
 
@@ -134,7 +137,9 @@ setupClose.addEventListener('keydown', function (evt) {
 setupUserName.addEventListener('invalid', function (evt) {
   if (!setupUserName.validity.valid) {
     if (setupUserName.validity.tooShort) {
-      setupUserName.setCustomValidity('Имя должно состоять минимум из 2-х символов');
+      setupUserName.setCustomValidity(
+          'Имя должно состоять минимум из 2-х символов'
+      );
     } else if (setupUserName.validity.tooLong) {
       setupUserName.setCustomValidity('Имя не должно превышать 25-ти символов');
     } else if (setupUserName.validity.valueMissing) {
@@ -152,7 +157,6 @@ function getRandomFill(elem, elemValue, array) {
   elem.style.fill = result;
 }
 
-
 var wizardCout = setup.querySelector('.wizard-coat');
 var coatColor = document.getElementsByName('coat-color');
 var wizardEyes = setup.querySelector('.wizard-eyes');
@@ -163,7 +167,6 @@ var wizardFireball = setup.querySelector('.setup-fireball-wrap');
 wizardCout.addEventListener('click', function () {
   getRandomFill(wizardCout, coatColor[0], WIZARD_COUTS);
 });
-
 
 // Изменени цвета глаз мага
 wizardEyes.addEventListener('click', function () {
