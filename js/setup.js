@@ -86,7 +86,7 @@
   // Обработчики событий вынесены в отдельные функции
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === 27 && setupUserName != document.activeElement) {
+    if (evt.keyCode === 27 && setupUserName !== document.activeElement) {
       closePopup();
     }
   };
@@ -135,7 +135,7 @@
 
   // валидация формы
 
-  setupUserName.addEventListener('invalid', function (evt) {
+  setupUserName.addEventListener('invalid', function () {
     if (!setupUserName.validity.valid) {
       if (setupUserName.validity.tooShort) {
         setupUserName.setCustomValidity(

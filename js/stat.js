@@ -12,8 +12,6 @@
     ctx.fillText('Cписок результатов :', 120, 60);
 
     var max = -1;
-    var maxIndex = -1;
-    var rand = Math.random().toFixed(2);
     var initialX = 120;
     var initialY = 90;
     var barWidth = 40;
