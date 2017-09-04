@@ -2,14 +2,14 @@
 (function () {
 
 
-  setup.querySelector('.setup-similar').classList.remove('hidden');
+  window.setup.querySelector('.setup-similar').classList.remove('hidden');
 
 
   // Работа с обработчиками событий
   var setupOpen = document.querySelector('.setup-open');
-  var setupClose = setup.querySelector('.setup-close');
-  var setupSubmit = setup.querySelector('.setup-submit');
-  var setupUserName = setup.querySelector('.setup-user-name');
+  var setupClose = window.setup.querySelector('.setup-close');
+  var setupSubmit = window.setup.querySelector('.setup-submit');
+  var setupUserName = window.setup.querySelector('.setup-user-name');
 
   // Обработчики событий вынесены в отдельные функции
 
@@ -20,12 +20,12 @@
   };
 
   var openPopup = function () {
-    setup.classList.remove('hidden');
+    window.setup.classList.remove('hidden');
     document.addEventListener('keydown', onPopupEscPress);
   };
 
   var closePopup = function () {
-    setup.classList.add('hidden');
+    window.setup.classList.add('hidden');
     document.removeEventListener('keydown', onPopupEscPress);
   };
 
@@ -107,7 +107,6 @@
     artifactsElement.style.outline = '';
     evt.target.appendChild(draggedItem);
     evt.preventDefault();
-    document.removeEventListener('dragenter', test);
   });
 
 

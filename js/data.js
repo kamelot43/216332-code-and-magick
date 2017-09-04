@@ -2,7 +2,7 @@
 (function () {
 
   window.setup = document.querySelector('.setup');
-  var similarListElement = setup.querySelector('.setup-similar-list');
+  var similarListElement = window.setup.querySelector('.setup-similar-list');
   window.WIZARD_NAMES = [
     'Иван',
     'Хуан Себастьян',
@@ -48,15 +48,15 @@
     var wizards = [];
     for (var i = 0; i < param; i++) {
       wizards[i] = {
-        name: getRandomElem(WIZARD_NAMES) + ' ' + getRandomElem(WIZARD_SURNAMES),
-        coatColor: getRandomElem(WIZARD_COUTS),
-        eyesColor: getRandomElem(WIZARD_EYES)
+        name: window.getRandomElem(window.WIZARD_NAMES) + ' ' + window.getRandomElem(window.WIZARD_SURNAMES),
+        coatColor: window.getRandomElem(window.WIZARD_COUTS),
+        eyesColor: window.getRandomElem(window.WIZARD_EYES)
       };
     }
     return wizards;
   }
 
-  var wizards = createWizards(WIZARD_GROUP);
+  var wizards = createWizards(window.WIZARD_GROUP);
 
   function renderWizard(wizard) {
     var wizardElement = WizardTemplate.cloneNode(true);

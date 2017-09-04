@@ -12,17 +12,19 @@
     ctx.fillText('Cписок результатов :', 120, 60);
 
     var max = -1;
+
+
     var initialX = 120;
     var initialY = 90;
     var barWidth = 40;
     var timeInitialY = 80;
     var histogramInitialY = 250;
 
-    for (var i = 0; i < times.length; i++) {
-      var time = times[i];
+    for (var j = 0; j < times.length; j++) {
+
+      var time = times[j];
       if (time > max) {
         max = time;
-        maxIndex = i;
       }
     }
 
@@ -36,7 +38,7 @@
       if (names[i] === 'Вы') {
         ctx.fillStyle = 'rgba(255, 0, 0, 1)';
       } else {
-        ctx.fillStyle = 'rgba(0, 0, 255, " + rand + ")';
+        ctx.fillStyle = 'rgba(0, 0, 255, ' + rand + ')';
       }
       ctx.fillRect(
           initialX + initialY * i,
@@ -46,11 +48,7 @@
       );
       ctx.fillStyle = 'rgba(0, 0, 0, 1)';
       ctx.fillText(names[i], initialX + initialY * i, nameInitialY);
-      ctx.fillText(
-          parseInt(times[i]),
-          initialX + initialY * i,
-          timeInitialY + histogramHeigth - times[i] * step
-      );
+      ctx.fillText(parseInt(times[i], 10), initialX + initialY * i, timeInitialY + histogramHeigth - times[i] * step);
     }
   };
 })();

@@ -1,14 +1,14 @@
 'use strict';
 (function () {
-  var wizardCout = setup.querySelector('.wizard-coat');
+  var wizardCout = window.setup.querySelector('.wizard-coat');
   var coatColor = document.getElementsByName('coat-color');
-  var wizardEyes = setup.querySelector('.wizard-eyes');
+  var wizardEyes = window.setup.querySelector('.wizard-eyes');
   var eyesColor = document.getElementsByName('eyes-color');
-  var wizardFireball = setup.querySelector('.setup-fireball-wrap');
+  var wizardFireball = window.setup.querySelector('.setup-fireball-wrap');
 
   // Изменение цвета заливки
   function getRandomFill(elem, elemValue, array) {
-    var result = getRandomElem(array);
+    var result = window.getRandomElem(array);
     elemValue.value = result;
     elem.style.fill = result;
   }

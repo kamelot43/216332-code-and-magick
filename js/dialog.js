@@ -5,8 +5,8 @@
 
 
   dialogHandle.addEventListener('mousedown', function (evt) {
-    test.addEventListener('click', function (evt) {
-      evt.preventDefault();
+    test.addEventListener('click', function (event) {
+      event.preventDefault();
     });
     var startCoords = {
       x: evt.clientX,
