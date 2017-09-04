@@ -2,14 +2,12 @@
 (function () {
 
 
-  window.setup.querySelector('.setup-similar').classList.remove('hidden');
-
-
   // Работа с обработчиками событий
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = window.setup.querySelector('.setup-close');
   var setupSubmit = window.setup.querySelector('.setup-submit');
   var setupUserName = window.setup.querySelector('.setup-user-name');
+  var formElement = document.querySelector('.setup-wizard-form');
 
   // Обработчики событий вынесены в отдельные функции
 
@@ -80,6 +78,15 @@
         setupUserName.setCustomValidity('');
       }
     }
+  });
+
+  // Отправка по сети данных формы методом AJAX
+  formElement.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(formElement), function () {
+      formElement.reset();
+      closePopup();
+    }, window.backend.error);
+    evt.preventDefault();
   });
 
 
