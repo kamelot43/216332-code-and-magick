@@ -1,7 +1,7 @@
 'use strict';
 (function () {
 
-  var setup = document.querySelector('.setup');
+  window.setup = document.querySelector('.setup');
   var similarListElement = setup.querySelector('.setup-similar-list');
 
   setup.querySelector('.setup-similar').classList.remove('hidden');
@@ -123,8 +123,11 @@
     }
   });
 
+  // вернуть значения по умолчанию при закрытии формы.
   setupClose.addEventListener('click', function () {
     closePopup();
+    window.setup.style.top = '';
+    window.setup.style.left = '';
   });
 
   setupClose.addEventListener('keydown', function (evt) {
