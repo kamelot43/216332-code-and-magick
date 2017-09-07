@@ -31,13 +31,16 @@
     return wizardElement;
   }
 
-  var onSuccess = function (wizards) {
-
+  window.render = function (data) {
     for (var i = 0; i < window.WIZARD_GROUP; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
+      fragment.appendChild(renderWizard(data[i]));
     }
     similarListElement.appendChild(fragment);
     window.setup.querySelector('.setup-similar').classList.remove('hidden');
+  };
+
+  var onSuccess = function (wizards) {
+    window.render(wizards);
 
   };
 
