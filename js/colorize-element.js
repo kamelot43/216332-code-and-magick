@@ -6,11 +6,10 @@
     return array[rand];
   }
 
-  window.colorizeElement = function (param, array, cb) {
-    param.addEventListener('click', function () {
-      var color = getRandomElem(array);
-      cb(param, color);
-    });
+  window.colorizeElement = function (param, array, test, cb) {
+    test = getRandomElem(array);
+    cb(param, test);
+    return test;
   };
 
 
