@@ -36,14 +36,13 @@
 
   wizardEyes.addEventListener('click', function () {
     eyesColor = window.colorizeElement(wizardEyes, window.WIZARD_EYES, eyesColor, fillElement);
-    updateWizards();
-
+    window.debounce(updateWizards);
   });
 
 
   wizardCout.addEventListener('click', function () {
     coatColor = window.colorizeElement(wizardCout, window.WIZARD_COUTS, coatColor, fillElement);
-    updateWizards();
+    window.debounce(updateWizards);
   });
 
 
