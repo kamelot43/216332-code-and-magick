@@ -19,6 +19,10 @@
   var wizardCout = window.setup.querySelector('.wizard-coat');
   var wizardEyes = window.setup.querySelector('.wizard-eyes');
   var wizardFireball = window.setup.querySelector('.setup-fireball-wrap');
+  var wizards = [];
+  var eyesColor;
+  var coatColor;
+  var fireballColor;
 
 
   var fillElement = function (element, color) {
@@ -29,40 +33,56 @@
     element.style.backgroundColor = color;
   };
 
-  var eyesColor;
+
   wizardEyes.addEventListener('click', function () {
     eyesColor = window.colorizeElement(wizardEyes, window.WIZARD_EYES, eyesColor, fillElement);
+    updateWizards();
 
   });
 
-  var coatColor;
+
   wizardCout.addEventListener('click', function () {
     coatColor = window.colorizeElement(wizardCout, window.WIZARD_COUTS, coatColor, fillElement);
+    updateWizards();
   });
 
 
-  var fireballColor;
   wizardFireball.addEventListener('click', function () {
     window.colorizeElement(wizardFireball, window.WIZARD_FIREBALL, fireballColor, changeElementBackground);
   });
 
 
-  var wizards = [];
-
   var updateWizards = function () {
+
+    var sameCoatAndEyesWizards = wizards.filter(function (it) {
+      return it.colorCoat === coatColor && it.colorEyes === eyesColor;
+    });
+
     var sameCoatWizards = wizards.filter(function (it) {
       return it.colorCoat === coatColor;
     });
+
     var sameEyesWizards = wizards.filter(function (it) {
       return it.colorEyes === eyesColor;
     });
 
-    window.render(sameCoatWizards.concat(sameEyesWizards).concat(wizards));
+    var filteredWizards = sameCoatAndEyesWizards;
+    filteredWizards = filteredWizards.concat(sameCoatWizards);
+    filteredWizards = filteredWizards.concat(sameEyesWizards);
+    filteredWizards = filteredWizards.concat(wizards);
+
+    var uniqueWizards =
+    filteredWizards.filter(function (it, i) {
+      return filteredWizards.indexOf(it) === i;
+    });
+
+    window.render(uniqueWizards);
   };
 
   var onSuccess = function (data) {
-    window.render(data);
     wizards = data;
+    updateWizards();
+
   };
 
   window.backend.load(onSuccess, window.backend.error);

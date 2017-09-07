@@ -17,6 +17,7 @@
   }
 
   window.render = function (data) {
+    similarListElement.innerHTML = '';
     for (var i = 0; i < window.WIZARD_GROUP; i++) {
       fragment.appendChild(renderWizard(data[i]));
     }
